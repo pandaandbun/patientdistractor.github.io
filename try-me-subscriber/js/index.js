@@ -160,7 +160,7 @@ var app = new Vue({
     // Often you'll simply put your own payload, e.g. JSON, in the binaryAttachment,
     // so you won't need to inspect the message contents like this.
     messageAdd: function messageAdd(message) {
-	  window.location = "http://patientdistractor.com";
+	  window.location = "http://webvr.patientdistractor.com";
       this.messages.unshift({
         date: new Date(),
         format: message.getSdtContainer() ? 'sdtText' : 'binaryAttachment',
