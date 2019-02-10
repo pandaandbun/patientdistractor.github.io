@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Try Me Publisher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+  
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div id="vue-loading">
+  <i class="fas fa-circle-notch fa-spin fa-3x fa-fw"></i>
+</div>
+
+<div id="app" v-cloak>
+  <div class="steps">
+    <div class="number-box">1</div>
+    <div class="header">
+      Doctor Dashboard
+      <span v-show="connected">
+        <i class="session-status fas fa-link is-warning"></i>
+      </span>
+      <span v-show="!connected">
+        <i class="session-status fas fa-unlink is-primary"></i>
+      </span>
+    </div>
+  </div>
+  <div id="tab-session">
+  <button id = "advance">FIll</button>
+    <form>
+      <div v-if="showAdvancedSettings">
+		
+        <div class="field">
+          <label class="label">Broker URL</label>
+          <div class="control">
+            <input id = "url" class="input" type="text" v-model="tabs.session.form.url" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Client Username</label>
+          <div class="control">
+            <input id = "username" class="input" type="text" v-model="tabs.session.form.userName" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Client Password</label>
+          <div class="control">
+            <input id = "password" class="input" type="password" v-model="tabs.session.form.password" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Message VPN</label>
+          <div class="control">
+            <input id = "vpn" class="input" type="text" v-model="tabs.session.form.vpnName" />
+          </div>
+        </div>
+      </div>
+      
+      <div class='buttons'>
+        <input class="button is-primary" 
+               type="submit" 
+               v-model="tabs.session.form.button.connect" 
+               :disabled="session"
+               @click.prevent="connect" 
+               />
+        <input class="button" 
+               type="submit" 
+               v-model="tabs.session.form.button.disconnect" 
+               :disabled="!session" 
+               @click.prevent="disconnect"
+               />
+        <i class="fa fa-spinner fa-fw fa-spin" aria-hidden="true" v-if="sessionRequestPending"></i>
+        <a class="advanced" @click.prevent="toggleAdvancedSettings()">
+          <span v-if="showAdvancedSettings">hide</span>
+          <span v-if="!showAdvancedSettings">show advanced settings</span>
+        </a>
+      </div>
+    </form>
+    
+    <div class="status message is-primary" v-show="tabs.session.status.show">
+      <div class="message-header">
+        <p>Connect Status</p>
+      </div>
+      <div class="message-body">
+        {{tabs.session.status.message}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="steps">
+    <div class="number-box">2</div>
+    <div class="header">Publish</div>
+  </div>
+  <div id="tab-publish">
+    <form>
+      <div class="field">
+        <label class="label">Topic</label>
+        <div class="control">
+          <input class="input" type="text" v-model="tabs.publish.form.topic" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Message</label>
+        <div class="control">
+          <textarea class="textarea"
+                    rows="3"
+                    v-model="tabs.publish.form.message" 
+                    placeholder="">
+          </textarea>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" 
+                   value="binaryAttachment"
+                   v-model="tabs.publish.form.format">
+            binary
+          </label>
+          <label class="radio">
+            <input type="radio"
+                   value="sdtText"
+                   v-model="tabs.publish.form.format">
+            text
+          </label>
+        </div>
+      </div>
+      <input class="button is-primary margin-top" 
+             type="submit"
+             v-model="tabs.publish.form.button.publish" 
+             :disabled="!connected" 
+             @click.prevent="publish"
+      />
+    </form>
+    <transition name="fade" mode="out-in">
+      <div class="status message is-primary" 
+           v-show="tabs.publish.status.show">
+        <div class="message-header">
+          <p>Publish Status</p>
+        </div>
+        <div class="message-body">
+          {{tabs.publish.status.message}}
+        </div>
+      </div>
+    </transition>
+  </div>
+</div>
+  <script src='https://cdn.jsdelivr.net/npm/solclientjs'></script>
+<script src='https://storage.googleapis.com/solace-cloud-dx-static/api-console-bridge/0.0.1/solacecloud-getcurrentservice-0.0.1.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js'></script>
+<script src='js/jquery.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+	<script>
+		$("#advance").click(function(){
+			$("#vpn").val("msgvpn-4b11zr9pd");
+			$("#url").val("wss://mr4b11zr9q7.messaging.mymaas.net:443");
+			$("#username").val("solace-cloud-client");
+			$("#password").val("tdk3eihl9hrptqq0d560k54e39");
+		});
+		
+	</script>
+
+
+
+
+</body>
+
+</html>

@@ -2,11 +2,13 @@ $("#doc").click(function(){
 	window.location = "doc.html";
 });
 
-$("#pat").click(function(){
-	window.location = "patient.html";
+$("#sub").click(function(){
+	if($("#email").val() == "admin"  && $("#password").val() == "admin"){
+		window.location = "try-me-publisher/index.html";
+	}
 });
 
-$("#patbutton").click(function(){
-	window.location = "./webvr/index.html";
+$("#pat").click(function(){
+	window.location = "try-me-subscriber/index.html";
 });
 
