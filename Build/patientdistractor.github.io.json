@@ -1,9 +1,9 @@
 {
 "companyName": "DefaultCompany",
 "productName": "Project1",
-"dataUrl": "webvr.data.unityweb",
-"wasmCodeUrl": "webvr.wasm.code.unityweb",
-"wasmFrameworkUrl": "webvr.wasm.framework.unityweb",
+"dataUrl": "patientdistractor.github.io.data.unityweb",
+"wasmCodeUrl": "patientdistractor.github.io.wasm.code.unityweb",
+"wasmFrameworkUrl": "patientdistractor.github.io.wasm.framework.unityweb",
 "TOTAL_MEMORY": 268435456,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
